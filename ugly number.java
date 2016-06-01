@@ -27,4 +27,25 @@ public class Solution {
         
         
     }
+    
+    
+    //use primes[] instead of 2,3,5
+    public int nthSuperUglyNumber(int n, int[] primes) {
+        int[] nums=new int[n];
+        int[] index=new int[primes.length];
+        nums[0]=1;
+        int j=0;
+        while(j<n-1){
+            int min=Integer.MAX_VALUE;
+            for(int i=0;i<primes.length;i++){
+                if(primes[i]*nums[index[i]]<min) min=primes[i]*nums[index[i]];
+            }
+            j++;
+            nums[j]=min;
+            for(int i=0;i<primes.length;i++){
+                if(primes[i]*nums[index[i]]==min) index[i]++;
+            }
+        }
+        return nums[n-1];
+    }
 }
